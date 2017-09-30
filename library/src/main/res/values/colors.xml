@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="av_color1">#fd313b</color>
+    <color name="av_color2">#fd313b</color>
+    <color name="av_color3">#fd313b</color>
+    <color name="av_color4">#fd313b</color>
+
+    <color name="av_color_bg">@android:color/transparent</color>
+
+    <array name="av_colors">
+        <item>@color/av_color4</item>
+        <item>@color/av_color3</item>
+        <item>@color/av_color2</item>
+        <item>@color/av_color1</item>
+    </array>
+</resources>
