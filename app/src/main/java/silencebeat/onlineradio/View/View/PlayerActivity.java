@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -191,16 +192,6 @@ public class PlayerActivity extends Activity implements RadioListener, View.OnCl
 
             }
         },1000);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (content.viewList.isShown()){
-            toogleList();
-            return;
-        }
-        super.onBackPressed();
-
     }
 
     private void toogleList(){
@@ -405,5 +396,29 @@ public class PlayerActivity extends Activity implements RadioListener, View.OnCl
         final int color = newBitmap.getPixel(0, 0);
         newBitmap.recycle();
         return color;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                if (content.viewList.isShown()){
+                    toogleList();
+                    return true;
+                }
+                if (isTaskRoot() && mRadioManager.isPlaying()) {
+                    Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                    homeIntent.addCategory(Intent.CATEGORY_HOME);
+                    startActivity(homeIntent);
+                    return true;
+                } else {
+                    super.onKeyDown(keyCode, event);
+                    return true;
+                }
+
+            default:
+                super.onKeyDown(keyCode, event);
+                return true;
+        }
     }
 }
